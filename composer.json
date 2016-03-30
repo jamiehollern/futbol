@@ -1,0 +1,36 @@
+{
+  "name": "jamiehollern/Futbol",
+  "description": "Football (soccer) data and statistics manipulation.",
+  "type": "library",
+  "keywords": [
+    "football",
+    "soccer",
+    "league",
+    "statistics"
+  ],
+  "homepage": "https://github.com/jamiehollern/futbol",
+  "time": "2016-03-30",
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Jamie Hollern",
+      "email": "jamiehollern@gmail.com",
+      "homepage": "https://github.com/jamiehollern",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "jamiehollern@gmail.com",
+    "issues": "https://github.com/jamiehollern/futbol/issues",
+    "source": "https://github.com/jamiehollern/futbol"
+  },
+  "require-dev": {
+    "monolog/monolog": "1.0.*",
+    "mockery/mockery": "~0.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "jamiehollern\\Futbol\\": "src/"
+    }
+  }
+}
