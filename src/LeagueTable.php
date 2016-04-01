@@ -2,24 +2,24 @@
 /**
  * @file
  *
- * Contains \Futbol\Table;
+ * Contains \Futbol\LeagueTable;
  */
 namespace Futbol;
 
 use Underscore\Types\Arrays;
 
 /**
- * Class Table
+ * Class LeagueTable
  *
  * @package \Futbol
  */
-class Table
+class LeagueTable
 {
 
     /**
      * @var \Underscore\Types\Arrays
      */
-    protected $arrays;
+    protected $array_league;
 
     const WIN = 3;
 
@@ -34,22 +34,26 @@ class Table
     protected $results = [];
 
     /**
-     * @param \Underscore\Types\Arrays $arrays
+     * Constructor.
      */
-    public function __construct(Arrays $arrays)
+    public function __construct($config = [])
     {
-        $this->arrays = $arrays;
-    }
-
-    public function init($config = [])
-    {
+        // If there are matches.
         if (isset($config['results'])) {
+            // Set them internally.
             $this->results = $config['results'];
-        }
-        if ($this->teams = $this->getTeams()) {
-            $this->league_table = $this->setDefaultTable();
+            // If there are teams.
+            if ($this->teams = $this->getTeams()) {
+                // Build the default table.
+                $this->league_table = $this->setDefaultTable();
+            }
         }
         return $this;
+    }
+
+    public function __toString() {
+        // Return a cheeky ASCII table.
+        return '';
     }
 
     /**
@@ -131,7 +135,9 @@ class Table
         foreach ($ids as $id => $name) {
             $league_table[$id] = array_merge(['name' => $name], $defaults);
         }
-        return $league_table;
+        var_dump($league_table);
+        $this->array_league = new Arrays($league_table);
+        return $this;
     }
 
     public function calculatePositions()
