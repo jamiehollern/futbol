@@ -123,6 +123,11 @@ class Row
      */
     protected $points = 0;
 
+    public function __construct($id, $name) {
+        $this->setTeamId($id);
+        $this->setTeamName($name);
+    }
+
     /**
      * This method is used to lazy increment/decrement properties.
      *
@@ -144,8 +149,7 @@ class Row
                 $valid_property = property_exists($this, $property);
                 // If the method and property exist in the class.
                 if ($valid_method && $valid_property) {
-                    call_user_func_array([$this, $method],
-                      [&$this->{$property}]);
+                    call_user_func_array([$this, $method], [&$this->{$property}]);
                     return;
                 }
             }
@@ -163,6 +167,14 @@ class Row
     protected function stringToUnderscore($name)
     {
         return strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $name));
+    }
+
+    public function incr($name, $value = 1) {
+        $this->increment($this->{$name}, $value);
+    }
+
+    public function decr($name, $value = 1) {
+        $this->decrement($this->{$name}, $value);
     }
 
     /**

@@ -6,6 +6,7 @@
  */
 namespace Futbol;
 
+use Futbol\LeagueTable\Row;
 use Underscore\Types\Arrays;
 
 /**
@@ -44,8 +45,15 @@ class LeagueTable
             $this->results = $config['results'];
             // If there are teams.
             if ($this->teams = $this->getTeams()) {
+                $rows = [];
                 // Build the default table.
-                $this->league_table = $this->setDefaultTable();
+                foreach ($this->teams as $id => $name) {
+                  $rows[$id] = new Row($id, $name);
+                }
+                //var_dump($rows);
+                $this->league_table = new Arrays($rows);
+                var_dump($this->league_table);
+
             }
         }
         return $this;
@@ -54,24 +62,6 @@ class LeagueTable
     public function __toString() {
         // Return a cheeky ASCII table.
         return '';
-    }
-
-    /**
-     * @param int $value
-     * @param int $number
-     */
-    protected function increment(&$value, $number = 1)
-    {
-        $value = $value + $number;
-    }
-
-    /**
-     * @param int $value
-     * @param int $number
-     */
-    protected function decrement(&$value, $number = 1)
-    {
-        $value = $value - $number;
     }
 
     public function getTeams()
@@ -84,66 +74,11 @@ class LeagueTable
         return $ids;
     }
 
-    /**
-     * Sets up a default league table array with data set to zero.
-     *
-     * @todo Set up a step for deductions after this.
-     * @return $this
-     */
-    public function setDefaultTable()
-    {
-        $league_table = [];
-        $defaults = [
-            // Wins.
-            'w' => 0,
-            // Draws.
-            'd' => 0,
-            // Losses.
-            'l' => 0,
-            // Home wins.
-            'hw' => 0,
-            // Home draws.
-            'hd' => 0,
-            // Home losses.
-            'hl' => 0,
-            // Away wins.
-            'aw' => 0,
-            // Away draws.
-            'ad' => 0,
-            // Away losses.
-            'al' => 0,
-            // Games played.
-            'gp' => 0,
-            // Goals for.
-            'f' => 0,
-            // Goals against.
-            'a' => 0,
-            // Home goals for.
-            'hf' => 0,
-            // Home goals against.
-            'ha' => 0,
-            // Away goals for.
-            'af' => 0,
-            // Away goals against.
-            'aa' => 0,
-            // Goal difference.
-            'gd' => 0,
-            // Points.
-            'p' => 0,
-        ];
-        $ids = $this->teams;
-        foreach ($ids as $id => $name) {
-            $league_table[$id] = array_merge(['name' => $name], $defaults);
-        }
-        var_dump($league_table);
-        $this->array_league = new Arrays($league_table);
-        return $this;
-    }
-
     public function calculatePositions()
     {
         foreach ($this->results as $result) {
-            foreach ($this->getTeams() as $team_id => $team_name) {
+
+            /*foreach ($this->getTeams() as $team_id => $team_name) {
                 if ($team_id == $result['home_team_id']) {
                     $this->increment($this->league_table[$team_id]['gp']);
                     $this->increment($this->league_table[$team_id]['f'],
@@ -198,13 +133,8 @@ class LeagueTable
                         $this->increment($this->league_table[$team_id]['al']);
                     }
                 }
-            }
+            }*/
         }
-        return $this;
-    }
-
-    public function sort($columns = ['p'])
-    {
         return $this;
     }
 
