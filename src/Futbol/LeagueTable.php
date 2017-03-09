@@ -1,9 +1,5 @@
 <?php
-/**
- * @file
- *
- * Contains \Futbol\LeagueTable;
- */
+
 namespace Futbol;
 
 use Futbol\LeagueTable\Row;
@@ -16,11 +12,6 @@ use Underscore\Types\Arrays;
  */
 class LeagueTable
 {
-
-    /**
-     * @var \Underscore\Types\Arrays
-     */
-    protected $array_league;
 
     const WIN = 3;
 
@@ -48,18 +39,17 @@ class LeagueTable
                 $rows = [];
                 // Build the default table.
                 foreach ($this->teams as $id => $name) {
-                  $rows[$id] = new Row($id, $name);
+                    $rows[$id] = new Row($id, $name);
                 }
-                //var_dump($rows);
-                $this->league_table = new Arrays($rows);
-                var_dump($this->league_table);
-
+                //$this->league_table = new Arrays($rows);
+                $this->league_table = $rows;
             }
         }
         return $this;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         // Return a cheeky ASCII table.
         return '';
     }
@@ -77,64 +67,58 @@ class LeagueTable
     public function calculatePositions()
     {
         foreach ($this->results as $result) {
-
-            /*foreach ($this->getTeams() as $team_id => $team_name) {
-                if ($team_id == $result['home_team_id']) {
-                    $this->increment($this->league_table[$team_id]['gp']);
-                    $this->increment($this->league_table[$team_id]['f'],
-                      $result['home_team_goals']);
-                    $this->increment($this->league_table[$team_id]['hf'],
-                      $result['home_team_goals']);
-                    $this->increment($this->league_table[$team_id]['a'],
+            foreach ($this->league_table as $row) {
+                if ($team_id = $row->getTeamId() == $result['home_team_id']) {
+                    $row->incr('games_played');
+                    $row->incr('goals_for', $result['home_team_goals']);
+                    $row->incr('home_goals_for', $result['home_team_goals']);
+                    $row->incr('goals_against', $result['away_team_goals']);
+                    $row->incr('home_goals_against',
                       $result['away_team_goals']);
-                    $this->increment($this->league_table[$team_id]['ha'],
-                      $result['away_team_goals']);
-                    $this->increment($this->league_table[$team_id]['gd'],
+                    $row->incr('goal_difference',
+                      ($result['home_team_goals'] - $result['away_team_goals']));
+                    $row->incr('home_goal_difference',
                       ($result['home_team_goals'] - $result['away_team_goals']));
                     if ($result['home_team_goals'] > $result['away_team_goals']) {
-                        $this->increment($this->league_table[$team_id]['w']);
-                        $this->increment($this->league_table[$team_id]['hw']);
-                        $this->increment($this->league_table[$team_id]['p'],
-                          self::WIN);
+                        $row->incr('wins');
+                        $row->incr('home_wins');
+                        $row->incr('points', self::WIN);
                     } elseif ($result['home_team_goals'] == $result['away_team_goals']) {
-                        $this->increment($this->league_table[$team_id]['d']);
-                        $this->increment($this->league_table[$team_id]['hd']);
-                        $this->increment($this->league_table[$team_id]['p'],
-                          self::DRAW);
+                        $row->incr('draws');
+                        $row->incr('home_draws');
+                        $row->incr('points', self::DRAW);
                     } elseif ($result['home_team_goals'] < $result['away_team_goals']) {
-                        $this->increment($this->league_table[$team_id]['l']);
-                        $this->increment($this->league_table[$team_id]['hl']);
+                        $row->incr('losses');
+                        $row->incr('home_losses');
                     }
                 }
-                if ($team_id == $result['away_team_id']) {
-                    $this->increment($this->league_table[$team_id]['gp']);
-                    $this->increment($this->league_table[$team_id]['f'],
-                      $result['away_team_goals']);
-                    $this->increment($this->league_table[$team_id]['af'],
-                      $result['away_team_goals']);
-                    $this->increment($this->league_table[$team_id]['a'],
+                if ($team_id = $row->getTeamId() == $result['away_team_id']) {
+                    $row->incr('games_played');
+                    $row->incr('goals_for', $result['away_team_goals']);
+                    $row->incr('away_goals_for', $result['away_team_goals']);
+                    $row->incr('goals_against', $result['home_team_goals']);
+                    $row->incr('away_goals_against',
                       $result['home_team_goals']);
-                    $this->increment($this->league_table[$team_id]['aa'],
-                      $result['home_team_goals']);
-                    $this->increment($this->league_table[$team_id]['gd'],
+                    $row->incr('goal_difference',
+                      ($result['away_team_goals'] - $result['home_team_goals']));
+                    $row->incr('away_goal_difference',
                       ($result['away_team_goals'] - $result['home_team_goals']));
                     if ($result['home_team_goals'] < $result['away_team_goals']) {
-                        $this->increment($this->league_table[$team_id]['w']);
-                        $this->increment($this->league_table[$team_id]['aw']);
-                        $this->increment($this->league_table[$team_id]['p'],
-                          self::WIN);
+                        $row->incr('wins');
+                        $row->incr('away_wins');
+                        $row->incr('points', self::WIN);
                     } elseif ($result['home_team_goals'] == $result['away_team_goals']) {
-                        $this->increment($this->league_table[$team_id]['d']);
-                        $this->increment($this->league_table[$team_id]['ad']);
-                        $this->increment($this->league_table[$team_id]['p'],
-                          self::DRAW);
+                        $row->incr('draws');
+                        $row->incr('away_draws');
+                        $row->incr('points', self::DRAW);
                     } elseif ($result['home_team_goals'] > $result['away_team_goals']) {
-                        $this->increment($this->league_table[$team_id]['l']);
-                        $this->increment($this->league_table[$team_id]['al']);
+                        $row->incr('losses');
+                        $row->incr('away_losses');
                     }
                 }
-            }*/
+            }
         }
+        var_dump($this->league_table);
         return $this;
     }
 
