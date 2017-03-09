@@ -31,10 +31,21 @@ class MatchEnsureTraitTest extends TestCase
     /**
      * @test
      */
-    public function testNoMatches()
+    public function testNullMatches()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->mock->ensureMatches();
         $this->assertNull($this->mock->matches);
+    }
+
+    /**
+     * @test
+     */
+    public function testNoMatches()
+    {
+        $this->mock->matches = [];
+        $this->mock->ensureMatches();
+        $this->assertEmpty($this->mock->matches);
     }
 
     /**
