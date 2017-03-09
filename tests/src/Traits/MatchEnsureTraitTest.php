@@ -21,7 +21,7 @@ class MatchEnsureTraitTest extends TestCase
     private $mock;
 
     /**
-     *
+     * Setup method.
      */
     public function setUp()
     {
@@ -33,9 +33,8 @@ class MatchEnsureTraitTest extends TestCase
      */
     public function testNoMatches()
     {
-        $this->expectException(\Exception::class);
         $this->mock->ensureMatches();
-        $this->assertEmpty($this->mock->matches);
+        $this->assertNull($this->mock->matches);
     }
 
     /**

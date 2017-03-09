@@ -49,6 +49,16 @@ class LeagueRow
     /**
      * @var int
      */
+    private $home_games_played = 0;
+
+    /**
+     * @var int
+     */
+    private $away_games_played = 0;
+
+    /**
+     * @var int
+     */
     private $wins = 0;
 
     /**
@@ -142,6 +152,16 @@ class LeagueRow
     private $points = 0;
 
     /**
+     * @var int
+     */
+    private $home_points = 0;
+
+    /**
+     * @var int
+     */
+    private $away_points = 0;
+
+    /**
      * LeagueRow constructor.
      *
      * @param \jamiehollern\futbol\Team $team
@@ -191,23 +211,27 @@ class LeagueRow
         $ag = $match->getAwayGoals();
         $gd = $hg - $ag;
         if ($hg > $ag) {
-            $this->incr('wins');
-            $this->incr('home_wins');
-            $this->incr('points', self::WIN);
+            $this->update('wins');
+            $this->update('home_wins');
+            $this->update('points', self::WIN);
+            $this->update('home_points', self::WIN);
         } elseif ($hg === $ag) {
-            $this->incr('draws');
-            $this->incr('home_draws');
-            $this->incr('points', self::DRAW);
+            $this->update('draws');
+            $this->update('home_draws');
+            $this->update('points', self::DRAW);
+            $this->update('home_points', self::DRAW);
         } else {
-            $this->incr('losses');
-            $this->incr('home_losses');
+            $this->update('losses');
+            $this->update('home_losses');
         }
-        $this->incr('goals_for', $hg);
-        $this->incr('home_goals_for', $hg);
-        $this->incr('goals_against', $ag);
-        $this->incr('home_goals_against', $ag);
-        $this->incr('goal_difference', $gd);
-        $this->incr('home_goal_difference', $gd);
+        $this->update('games_played');
+        $this->update('home_games_played');
+        $this->update('goals_for', $hg);
+        $this->update('home_goals_for', $hg);
+        $this->update('goals_against', $ag);
+        $this->update('home_goals_against', $ag);
+        $this->update('goal_difference', $gd);
+        $this->update('home_goal_difference', $gd);
     }
 
     /**
@@ -219,45 +243,43 @@ class LeagueRow
         $ag = $match->getAwayGoals();
         $gd = $ag - $hg;
         if ($hg < $ag) {
-            $this->incr('wins');
-            $this->incr('away_wins');
-            $this->incr('points', self::WIN);
+            $this->update('wins');
+            $this->update('away_wins');
+            $this->update('points', self::WIN);
+            $this->update('away_points', self::WIN);
         } elseif ($hg === $ag) {
-            $this->incr('draws');
-            $this->incr('away_draws');
-            $this->incr('points', self::DRAW);
+            $this->update('draws');
+            $this->update('away_draws');
+            $this->update('points', self::DRAW);
+            $this->update('away_points', self::DRAW);
         } else {
-            $this->incr('losses');
-            $this->incr('home_losses');
+            $this->update('losses');
+            $this->update('away_losses');
         }
-        $this->incr('goals_for', $ag);
-        $this->incr('away_goals_for', $ag);
-        $this->incr('goals_against', $hg);
-        $this->incr('away_goals_against', $hg);
-        $this->incr('goal_difference', $gd);
-        $this->incr('away_goal_difference', $gd);
+        $this->update('games_played');
+        $this->update('away_games_played');
+        $this->update('goals_for', $ag);
+        $this->update('away_goals_for', $ag);
+        $this->update('goals_against', $hg);
+        $this->update('away_goals_against', $hg);
+        $this->update('goal_difference', $gd);
+        $this->update('away_goal_difference', $gd);
     }
 
     /**
-     * Increments a value by reference.
+     * Updates an integer property value.
      *
      * @param string $property
      * @param int    $number
      */
-    private function incr(string $property, int $number = 1)
+    private function update(string $property, int $number = 1)
     {
         $this->{$property} = $this->{$property} + $number;
     }
 
-    /**
-     * Decrements a value by reference.
-     *
-     * @param int $property
-     * @param int $number
-     */
-    private function decr($property, $number = 1)
+    public function getTeam()
     {
-        $this->{$property} = $this->{$property} - $number;
+        return $this->team;
     }
 
     /**
@@ -265,7 +287,7 @@ class LeagueRow
      */
     public function getTeamId()
     {
-        return $this->team->getId();
+        return $this->getTeam()->getId();
     }
 
     /**
@@ -273,7 +295,7 @@ class LeagueRow
      */
     public function getTeamName()
     {
-        return $this->team->getName();
+        return $this->getTeam()->getName();
     }
 
     /**
@@ -282,6 +304,22 @@ class LeagueRow
     public function getGamesPlayed()
     {
         return $this->games_played;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHomeGamesPlayed()
+    {
+        return $this->home_games_played;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAwayGamesPlayed()
+    {
+        return $this->away_games_played;
     }
 
     /**
@@ -426,6 +464,22 @@ class LeagueRow
     public function getAwayGoalDifference()
     {
         return $this->away_goal_difference;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHomePoints()
+    {
+        return $this->home_points;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAwayPoints()
+    {
+        return $this->away_points;
     }
 
     /**

@@ -14,9 +14,6 @@ trait MatchEnsureTrait
      */
     public function ensureMatches()
     {
-        if (empty($this->matches)) {
-            throw new \Exception(static::class . ' objects needs at least one match.');
-        }
         array_walk($this->matches, function ($match) {
             if (!$match instanceof Match) {
                 throw new \Exception('Cannot create ' . static::class . ' object as not all matches are Match objects.');

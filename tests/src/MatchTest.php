@@ -6,14 +6,27 @@ use jamiehollern\futbol\Team;
 use jamiehollern\futbol\Match;
 use PHPUnit\Framework\TestCase;
 
-
+/**
+ * Class MatchTest
+ *
+ * @package jamiehollern\futbol\Tests
+ */
 class MatchTest extends TestCase
 {
 
+    /**
+     * @var \jamiehollern\futbol\Team
+     */
     private $aberdeen;
 
+    /**
+     * @var \jamiehollern\futbol\Team
+     */
     private $celtic;
 
+    /**
+     * Setup method.
+     */
     public function setUp()
     {
         $this->aberdeen = new Team(1, 'Aberdeen');

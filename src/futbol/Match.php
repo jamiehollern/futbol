@@ -2,8 +2,6 @@
 
 namespace jamiehollern\futbol;
 
-use jamiehollern\futbol\Team;
-
 /**
  * Class Match
  *
