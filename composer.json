@@ -25,7 +25,8 @@
     "source": "https://github.com/jamiehollern/futbol"
   },
   "require": {
-    "php": ">=7.0"
+    "php": ">=7.0",
+    "symfony/serializer": "^3.2"
   },
   "require-dev": {
     "monolog/monolog": "1.0.*",

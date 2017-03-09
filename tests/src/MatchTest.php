@@ -1,26 +1,26 @@
 <?php
 
-namespace jamiehollern\futbol\Tests;
+namespace jamiehollern\futbol\Tests\Model;
 
-use jamiehollern\futbol\Team;
-use jamiehollern\futbol\Match;
+use jamiehollern\futbol\Model\Team;
+use jamiehollern\futbol\Model\Match;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class MatchTest
  *
- * @package jamiehollern\futbol\Tests
+ * @package jamiehollern\futbol\Tests\Model
  */
 class MatchTest extends TestCase
 {
 
     /**
-     * @var \jamiehollern\futbol\Team
+     * @var \jamiehollern\futbol\Model\Team
      */
     private $aberdeen;
 
     /**
-     * @var \jamiehollern\futbol\Team
+     * @var \jamiehollern\futbol\Model\Team
      */
     private $celtic;
 
@@ -54,8 +54,8 @@ class MatchTest extends TestCase
      */
     public function testPropertyValues() {
         $match = new Match($this->aberdeen, $this->celtic, 0, 3);
-        $this->assertInstanceOf('jamiehollern\futbol\Team', $match->getHomeTeam());
-        $this->assertInstanceOf('jamiehollern\futbol\Team', $match->getAwayTeam());
+        $this->assertInstanceOf('jamiehollern\futbol\Model\Team', $match->getHomeTeam());
+        $this->assertInstanceOf('jamiehollern\futbol\Model\Team', $match->getAwayTeam());
         $this->assertEquals(1, $match->getHomeTeam()->getId());
         $this->assertEquals(2, $match->getAwayTeam()->getId());
         $this->assertEquals(0, $match->getHomeGoals());

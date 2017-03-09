@@ -1,8 +1,8 @@
 <?php
 
-namespace jamiehollern\futbol\Traits;
+namespace jamiehollern\futbol\Helpers;
 
-use jamiehollern\futbol\Match;
+use jamiehollern\futbol\Model\Match;
 
 trait MatchEnsureTrait
 {

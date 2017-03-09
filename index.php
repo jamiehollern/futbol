@@ -2,9 +2,9 @@
 
 require_once 'vendor/autoload.php';
 
-use jamiehollern\futbol\Team;
-use jamiehollern\futbol\Match;
-use jamiehollern\futbol\League;
+use jamiehollern\futbol\Model\Team;
+use jamiehollern\futbol\Model\Match;
+use jamiehollern\futbol\Model\ProcessedLeagueTable;
 
 $aberdeen = new Team(1, 'Aberdeen');
 $celtic = new Team(2, 'Celtic');
@@ -16,5 +16,9 @@ $matches = [
   new Match($celtic, $aberdeen, 3, 1),
 ];
 
-$league = new League($matches);
+$league = new ProcessedLeagueTable($matches);
+
+foreach ($league->getTableRows() as $row) {
+    print $row . "<br>\n";
+}
 

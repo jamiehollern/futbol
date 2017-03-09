@@ -1,42 +1,42 @@
 <?php
 
-namespace jamiehollern\futbol\Tests\League;
+namespace jamiehollern\futbol\Tests\Model\League;
 
-use jamiehollern\futbol\League\LeagueRow;
-use jamiehollern\futbol\Team;
-use jamiehollern\futbol\Match;
+use jamiehollern\futbol\Model\League\ProcessedTableRow;
+use jamiehollern\futbol\Model\Team;
+use jamiehollern\futbol\Model\Match;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class LeagueRowTest
+ * Class ProcessedTableRowTest
  *
- * @package jamiehollern\futbol\Tests\League
+ * @package jamiehollern\futbol\Tests\Model\League
  */
-class LeagueRowTest extends TestCase
+class ProcessedTableRowTest extends TestCase
 {
 
     /**
-     * @var \jamiehollern\futbol\Team
+     * @var \jamiehollern\futbol\Model\Team
      */
     private $aberdeen;
 
     /**
-     * @var \jamiehollern\futbol\Team
+     * @var \jamiehollern\futbol\Model\Team
      */
     private $celtic;
 
     /**
-     * @var \jamiehollern\futbol\Team
+     * @var \jamiehollern\futbol\Model\Team
      */
     private $dundee;
 
     /**
-     * @var \jamiehollern\futbol\Team
+     * @var \jamiehollern\futbol\Model\Team
      */
     private $hearts;
 
     /**
-     * @var \jamiehollern\futbol\Team
+     * @var \jamiehollern\futbol\Model\Team
      */
     private $kilmarnock;
 
@@ -72,7 +72,7 @@ class LeagueRowTest extends TestCase
      * @test
      */
     public function testRowAberdeen() {
-        $row_aberdeen = new LeagueRow($this->aberdeen, $this->matches);
+        $row_aberdeen = new ProcessedTableRow($this->aberdeen, $this->matches);
         $this->assertEquals($this->aberdeen, $row_aberdeen->getTeam());
         $this->assertEquals($this->aberdeen->getId(), $row_aberdeen->getTeamId());
         $this->assertEquals($this->aberdeen->getName(), $row_aberdeen->getTeamName());
@@ -106,7 +106,7 @@ class LeagueRowTest extends TestCase
      * @test
      */
     public function testRowCeltic() {
-        $row_celtic = new LeagueRow($this->celtic, $this->matches);
+        $row_celtic = new ProcessedTableRow($this->celtic, $this->matches);
         $this->assertEquals($this->celtic, $row_celtic->getTeam());
         $this->assertEquals($this->celtic->getId(), $row_celtic->getTeamId());
         $this->assertEquals($this->celtic->getName(), $row_celtic->getTeamName());
@@ -140,7 +140,7 @@ class LeagueRowTest extends TestCase
      * @test
      */
     public function testRowDundee() {
-        $row_dundee = new LeagueRow($this->dundee, $this->matches);
+        $row_dundee = new ProcessedTableRow($this->dundee, $this->matches);
         $this->assertEquals($this->dundee, $row_dundee->getTeam());
         $this->assertEquals($this->dundee->getId(), $row_dundee->getTeamId());
         $this->assertEquals($this->dundee->getName(), $row_dundee->getTeamName());

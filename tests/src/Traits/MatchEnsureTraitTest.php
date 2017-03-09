@@ -1,16 +1,16 @@
 <?php
 
-namespace jamiehollern\futbol\Tests;
+namespace jamiehollern\futbol\Tests\Helpers;
 
-use jamiehollern\futbol\Match;
-use jamiehollern\futbol\Team;
+use jamiehollern\futbol\Model\Match;
+use jamiehollern\futbol\Model\Team;
 use PHPUnit\Framework\TestCase;
-use jamiehollern\futbol\Traits\MatchEnsureTrait;
+use jamiehollern\futbol\Helpers\MatchEnsureTrait;
 
 /**
  * Class MatchEnsureTraitTest
  *
- * @package jamiehollern\futbol\Tests
+ * @package jamiehollern\futbol\Tests\Helpers
  */
 class MatchEnsureTraitTest extends TestCase
 {

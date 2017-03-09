@@ -1,14 +1,14 @@
 <?php
 
-namespace jamiehollern\futbol\Tests;
+namespace jamiehollern\futbol\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
-use jamiehollern\futbol\Team;
+use jamiehollern\futbol\Model\Team;
 
 /**
  * Class TeamTest
  *
- * @package jamiehollern\futbol\Tests
+ * @package jamiehollern\futbol\Tests\Model
  */
 class TeamTest extends TestCase
 {

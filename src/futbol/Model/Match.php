@@ -1,17 +1,17 @@
 <?php
 
-namespace jamiehollern\futbol;
+namespace jamiehollern\futbol\Model;
 
 /**
  * Class Match
  *
- * @package jamiehollern\futbol\Competition
+ * @package jamiehollern\futbol\Model
  */
-class Match
+final class Match
 {
 
     /**
-     * @var \jamiehollern\futbol\Team
+     * @var \jamiehollern\futbol\Model\Team
      */
     private $home_team;
 
@@ -21,7 +21,7 @@ class Match
     private $home_goals;
 
     /**
-     * @var \jamiehollern\futbol\Team
+     * @var \jamiehollern\futbol\Model\Team
      */
     private $away_team;
 
@@ -33,8 +33,8 @@ class Match
     /**
      * Match constructor.
      *
-     * @param \jamiehollern\futbol\Team $homeTeam
-     * @param \jamiehollern\futbol\Team $awayTeam
+     * @param \jamiehollern\futbol\Model\Team $homeTeam
+     * @param \jamiehollern\futbol\Model\Team $awayTeam
      * @param int                       $homeGoals
      * @param int                       $awayGoals
      *
@@ -59,7 +59,7 @@ class Match
     }
 
     /**
-     * @return \jamiehollern\futbol\Team
+     * @return \jamiehollern\futbol\Model\Team
      */
     public function getHomeTeam(): Team
     {
@@ -75,7 +75,7 @@ class Match
     }
 
     /**
-     * @return \jamiehollern\futbol\Team
+     * @return \jamiehollern\futbol\Model\Team
      */
     public function getAwayTeam(): Team
     {

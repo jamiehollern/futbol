@@ -1,17 +1,17 @@
 <?php
 
-namespace jamiehollern\futbol\League;
+namespace jamiehollern\futbol\Model\League;
 
-use jamiehollern\futbol\Match;
-use jamiehollern\futbol\Team;
-use jamiehollern\futbol\Traits\MatchEnsureTrait;
+use jamiehollern\futbol\Model\Match;
+use jamiehollern\futbol\Model\Team;
+use jamiehollern\futbol\Helpers\MatchEnsureTrait;
 
 /**
- * Class LeagueRow
+ * Class ProcessedTableRow
  *
  * @package Futbol\LeagueTable
  */
-class LeagueRow
+class ProcessedTableRow
 {
 
     use MatchEnsureTrait;
@@ -32,7 +32,7 @@ class LeagueRow
     const LOSS = 0;
 
     /**
-     * @var \jamiehollern\futbol\Team
+     * @var \jamiehollern\futbol\Model\Team
      */
     private $team;
 
@@ -162,9 +162,9 @@ class LeagueRow
     private $away_points = 0;
 
     /**
-     * LeagueRow constructor.
+     * ProcessedTableRow constructor.
      *
-     * @param \jamiehollern\futbol\Team $team
+     * @param \jamiehollern\futbol\Model\Team $team
      * @param array                     $matches
      */
     public function __construct(Team $team, array $matches)
@@ -183,7 +183,7 @@ class LeagueRow
     }
 
     /**
-     * @param \jamiehollern\futbol\Match $match
+     * @param \jamiehollern\futbol\Model\Match $match
      *
      * @return bool
      */
@@ -193,7 +193,7 @@ class LeagueRow
     }
 
     /**
-     * @param \jamiehollern\futbol\Match $match
+     * @param \jamiehollern\futbol\Model\Match $match
      *
      * @return bool
      */
@@ -203,7 +203,7 @@ class LeagueRow
     }
 
     /**
-     * @param \jamiehollern\futbol\Match $match
+     * @param \jamiehollern\futbol\Model\Match $match
      */
     private function processMatchHome(Match $match)
     {
@@ -235,7 +235,7 @@ class LeagueRow
     }
 
     /**
-     * @param \jamiehollern\futbol\Match $match
+     * @param \jamiehollern\futbol\Model\Match $match
      */
     private function processMatchAway(Match $match)
     {
@@ -488,6 +488,20 @@ class LeagueRow
     public function getPoints()
     {
         return $this->points;
+    }
+
+    public function __toString()
+    {
+        $table_row = $this->getTeamName();
+        $table_row .= $this->getGamesPlayed();
+        $table_row .= $this->getWins();
+        $table_row .= $this->getDraws();
+        $table_row .= $this->getLosses();
+        $table_row .= $this->getGoalsFor();
+        $table_row .= $this->getGoalsAgainst();
+        $table_row .= $this->getGoalDifference();
+        $table_row .= $this->getPoints();
+        return $table_row;
     }
 
 }

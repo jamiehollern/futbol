@@ -1,13 +1,13 @@
 <?php
 
-namespace jamiehollern\futbol;
+namespace jamiehollern\futbol\Model;
 
 /**
  * Class Team
  *
- * @package jamiehollern\futbol
+ * @package jamiehollern\futbol\Model
  */
-class Team
+final class Team
 {
 
     /**
