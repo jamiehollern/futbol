@@ -1,17 +1,18 @@
 <?php
 
-namespace jamiehollern\futbol\Model\League;
+namespace jamiehollern\futbol\Process;
 
+use jamiehollern\futbol\Helpers\MatchEnsureTrait;
+use jamiehollern\futbol\Model\League\TableRow;
 use jamiehollern\futbol\Model\Match;
 use jamiehollern\futbol\Model\Team;
-use jamiehollern\futbol\Helpers\MatchEnsureTrait;
 
 /**
- * Class ProcessedTableRow
+ * Class ProcessLeagueMatches
  *
- * @package Futbol\LeagueTable
+ * @package jamiehollern\futbol\Process
  */
-class ProcessedTableRow
+final class ProcessLeagueMatches
 {
 
     use MatchEnsureTrait;
@@ -38,6 +39,7 @@ class ProcessedTableRow
 
     /**
      * @var array
+     *   An array of Match objects.
      */
     private $matches;
 
@@ -162,10 +164,10 @@ class ProcessedTableRow
     private $away_points = 0;
 
     /**
-     * ProcessedTableRow constructor.
+     * ProcessLeagueMatches constructor.
      *
      * @param \jamiehollern\futbol\Model\Team $team
-     * @param array                     $matches
+     * @param array                           $matches
      */
     public function __construct(Team $team, array $matches)
     {
@@ -183,6 +185,8 @@ class ProcessedTableRow
     }
 
     /**
+     * Returns true if this team is the home team in the specified match.
+     *
      * @param \jamiehollern\futbol\Model\Match $match
      *
      * @return bool
@@ -193,6 +197,8 @@ class ProcessedTableRow
     }
 
     /**
+     * Returns true if this team is the away team in the specified match.
+     *
      * @param \jamiehollern\futbol\Model\Match $match
      *
      * @return bool
@@ -203,6 +209,8 @@ class ProcessedTableRow
     }
 
     /**
+     * Processes the match with this team as the home team.
+     *
      * @param \jamiehollern\futbol\Model\Match $match
      */
     private function processMatchHome(Match $match)
@@ -235,6 +243,8 @@ class ProcessedTableRow
     }
 
     /**
+     * Processes the match with this team as the home team.
+     *
      * @param \jamiehollern\futbol\Model\Match $match
      */
     private function processMatchAway(Match $match)
@@ -277,231 +287,23 @@ class ProcessedTableRow
         $this->{$property} = $this->{$property} + $number;
     }
 
-    public function getTeam()
-    {
-        return $this->team;
-    }
-
     /**
-     * @return int
+     * Returns a TableRow with data.
+     *
+     * @return \jamiehollern\futbol\Model\League\TableRow
      */
-    public function getTeamId()
+    public function getTableRow(): TableRow
     {
-        return $this->getTeam()->getId();
-    }
-
-    /**
-     * @return string
-     */
-    public function getTeamName()
-    {
-        return $this->getTeam()->getName();
-    }
-
-    /**
-     * @return int
-     */
-    public function getGamesPlayed()
-    {
-        return $this->games_played;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHomeGamesPlayed()
-    {
-        return $this->home_games_played;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAwayGamesPlayed()
-    {
-        return $this->away_games_played;
-    }
-
-    /**
-     * @return int
-     */
-    public function getWins()
-    {
-        return $this->wins;
-    }
-
-    /**
-     * @return int
-     */
-    public function getDraws()
-    {
-        return $this->draws;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLosses()
-    {
-        return $this->losses;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHomeWins()
-    {
-        return $this->home_wins;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHomeDraws()
-    {
-        return $this->home_draws;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHomeLosses()
-    {
-        return $this->home_losses;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAwayWins()
-    {
-        return $this->away_wins;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAwayDraws()
-    {
-        return $this->away_draws;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAwayLosses()
-    {
-        return $this->away_losses;
-    }
-
-    /**
-     * @return int
-     */
-    public function getGoalsFor()
-    {
-        return $this->goals_for;
-    }
-
-    /**
-     * @return int
-     */
-    public function getGoalsAgainst()
-    {
-        return $this->goals_against;
-    }
-
-    /**
-     * @return int
-     */
-    public function getGoalDifference()
-    {
-        return $this->goal_difference;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHomeGoalsFor()
-    {
-        return $this->home_goals_for;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHomeGoalsAgainst()
-    {
-        return $this->home_goals_against;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHomeGoalDifference()
-    {
-        return $this->home_goal_difference;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAwayGoalsFor()
-    {
-        return $this->away_goals_for;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAwayGoalsAgainst()
-    {
-        return $this->away_goals_against;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAwayGoalDifference()
-    {
-        return $this->away_goal_difference;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHomePoints()
-    {
-        return $this->home_points;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAwayPoints()
-    {
-        return $this->away_points;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPoints()
-    {
-        return $this->points;
-    }
-
-    public function __toString()
-    {
-        $table_row = $this->getTeamName();
-        $table_row .= $this->getGamesPlayed();
-        $table_row .= $this->getWins();
-        $table_row .= $this->getDraws();
-        $table_row .= $this->getLosses();
-        $table_row .= $this->getGoalsFor();
-        $table_row .= $this->getGoalsAgainst();
-        $table_row .= $this->getGoalDifference();
-        $table_row .= $this->getPoints();
-        return $table_row;
+        return new TableRow($this->team, $this->games_played,
+          $this->home_games_played, $this->away_games_played, $this->wins,
+          $this->draws, $this->losses, $this->home_wins, $this->home_draws,
+          $this->home_losses, $this->away_wins, $this->away_draws,
+          $this->away_losses, $this->goals_for, $this->goals_against,
+          $this->goal_difference, $this->home_goals_for,
+          $this->home_goals_against, $this->home_goal_difference,
+          $this->away_goals_for, $this->away_goals_against,
+          $this->away_goal_difference, $this->points, $this->home_points,
+          $this->away_points);
     }
 
 }
