@@ -8,7 +8,7 @@ trait MatchEnsureTrait
 {
 
     /**
-     * Ensures that the matches array can be used to build a league table.
+     * Ensures that the matches array only contains matches.
      *
      * @throws \Exception
      */

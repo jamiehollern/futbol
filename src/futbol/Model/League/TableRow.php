@@ -9,7 +9,7 @@ use jamiehollern\futbol\Model\Team;
  *
  * @package Futbol\LeagueTable
  */
-class TableRow
+final class TableRow
 {
 
     /**

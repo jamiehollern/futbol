@@ -2,9 +2,6 @@
 
 namespace jamiehollern\futbol\Model;
 
-use jamiehollern\futbol\Model\League\TableRow;
-use jamiehollern\futbol\Helpers\MatchEnsureTrait;
-
 /**
  * Class ProcessedLeagueTable
  *
@@ -13,82 +10,19 @@ use jamiehollern\futbol\Helpers\MatchEnsureTrait;
 final class LeagueTable
 {
 
-    use MatchEnsureTrait;
-
-    /**
-     * @var array
-     */
-    private $teams = [];
-
     /**
      * @var array
      */
     private $table_rows = [];
 
     /**
-     * @var array
-     */
-    private $matches = [];
-
-    /**
-     * ProcessedLeagueTable constructor.
+     * LeagueTable constructor.
      *
-     * @param array $matches
+     * @param array $table_rows
      */
-    public function __construct(array $matches)
+    public function __construct(array $table_rows)
     {
-        $this->matches = $matches;
-        $this->ensureMatches();
-        $this->setTeams();
-        $this->setTableRows();
-    }
-
-    /**
-     * @return array
-     */
-    public function getMatches()
-    {
-        return $this->matches;
-    }
-
-    /**
-     * Sets the teams property as an array of Team objects.
-     */
-
-    private function setTeams()
-    {
-        foreach ($this->matches as $match) {
-            $home_team = $match->getHomeTeam();
-            $away_team = $match->getAwayTeam();
-            if (!isset($this->teams[$home_team->getId()])) {
-                $this->teams[$home_team->getId()] = $home_team;
-            }
-            if (!isset($this->teams[$away_team->getId()])) {
-                $this->teams[$away_team->getId()] = $away_team;
-            }
-        }
-        return $this->teams;
-    }
-
-    /**
-     * Returns an array of Team objects.
-     *
-     * @return array
-     */
-
-    public function getTeams()
-    {
-        return $this->teams;
-    }
-
-    /**
-     * Sets the table rows as ProcessedTableRow objects.
-     */
-    private function setTableRows()
-    {
-        foreach ($this->getTeams() as $team) {
-            $this->table_rows[] = new TableRow($team, $this->getMatches());
-        }
+        $this->table_rows = $table_rows;
     }
 
     /**
@@ -100,13 +34,6 @@ final class LeagueTable
     }
 
     /**
-     *
-     */
-    public function sort()
-    {
-    }
-
-    /**
      * @return string
      */
     public function __toString()
@@ -114,4 +41,5 @@ final class LeagueTable
         // Return a cheeky ASCII table.
         return '';
     }
+
 }
